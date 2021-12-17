@@ -30,4 +30,16 @@ class MissionController extends AbstractController
             'missions' => $missions
         ]);
     }
+
+    // INDEX
+    #[Route('/missions/{id}', name: 'mission_details')]
+    public function missionDetails(int $id): Response
+    {
+        $mission = $this->missionRepository->find($id);
+
+        return $this->render('mission/details.html.twig', [
+            'controller_name' => 'MissionController',
+            'mission' => $mission
+        ]);
+    }
 }

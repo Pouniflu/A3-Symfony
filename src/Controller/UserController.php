@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Mission;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,4 +30,5 @@ class UserController extends AbstractController
             'users' => $users
         ]);
     }
+
 }
