@@ -7,6 +7,7 @@ use App\Repository\MissionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MissionController extends AbstractController
@@ -31,7 +32,7 @@ class MissionController extends AbstractController
         ]);
     }
 
-    // INDEX
+    // DETAIL
     #[Route('/missions/{id}', name: 'mission_details')]
     public function missionDetails(int $id): Response
     {
@@ -41,5 +42,21 @@ class MissionController extends AbstractController
             'controller_name' => 'MissionController',
             'mission' => $mission
         ]);
+    }
+
+    // DELETE
+    #[Route('/missions/{id}/delete', name: 'delete_mission')]
+    public function deleteMission(int $id): Response
+    {
+        $mission = $this->missionRepository->find($id);
+
+        if (!$mission instanceof Mission) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->missionRepository->delete($mission);
+
+        return $this->redirectToRoute('missions_list');
+
     }
 }

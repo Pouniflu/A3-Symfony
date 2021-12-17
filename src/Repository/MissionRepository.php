@@ -19,6 +19,18 @@ class MissionRepository extends ServiceEntityRepository
         parent::__construct($registry, Mission::class);
     }
 
+    public function save(Mission $mission)
+    {
+        $this->getEntityManager()->persist($mission);
+        $this->getEntityManager()->flush();
+    }
+
+    public function delete(Mission $mission)
+    {
+        $this->getEntityManager()->remove($mission);
+        $this->getEntityManager()->flush();
+    }
+
     // /**
     //  * @return Mission[] Returns an array of Mission objects
     //  */
