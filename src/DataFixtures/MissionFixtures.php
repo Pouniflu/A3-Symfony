@@ -16,6 +16,8 @@ class MissionFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $users = $manager->getRepository(User::class)->findAll();
+
         // To create 5 missions
         for ($i = 0; $i < 5; $i++) {
 
@@ -26,7 +28,7 @@ class MissionFixtures extends Fixture
             $mission->setPriority('medium');
             $mission->setCompletionDate(new \DateTime());
             $mission->setStatus('In progress');
-            $mission->addSuperHero($this->userRepository->findOneBy(['id' => rand(3, 9)]));
+            $mission->addSuperHero($users[rand(0, count($users) - 1)]);
 
             $manager->persist($mission);
         }

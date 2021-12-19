@@ -13,7 +13,8 @@
 
     <div>
         <p><span>Priority :</span> {{ mission.priority }}</p>
-        <p><span>Priority :</span> {{ mission.status }}</p>
+        <p><span>Status :</span> {{ mission.status }}</p>
+        <p><span>Completion date :</span> {{ mission.completionDate|date("m/d/Y") }}</p>
     </div>
 
     <hr>
