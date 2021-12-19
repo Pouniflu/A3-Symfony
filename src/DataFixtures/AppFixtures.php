@@ -10,7 +10,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    public function __construct(private UserClient $userClient) {}
+    public function __construct(private UserClient $userClient, private UserPasswordHasherInterface $userPasswordHasher) {}
 
     public function load(ObjectManager $manager): void
     {
@@ -19,6 +19,7 @@ class AppFixtures extends Fixture
         $admin = new User();
         $admin->setUserName($adminAPI['name']);
         $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setPassword($this->userPasswordHasher->hashPassword($admin, 'admin123'));
         $manager->persist($admin);
 
         // To create 10 superhero
@@ -27,6 +28,7 @@ class AppFixtures extends Fixture
             $superHero = new User();
             $superHero->setUserName($randomSuperHero['name']);
             $superHero->setRoles(['ROLE_SUPER_HERO']);
+            $superHero->setPassword($this->userPasswordHasher->hashPassword($superHero, 'password'));
             $manager->persist($superHero);
         }
 
