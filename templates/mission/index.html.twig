@@ -16,7 +16,7 @@
     {% for mission in missions %}
         <tr>
             <td>{{ mission.name }}</td>
-            <td>Date</td>
+            <td>{{ mission.completionDate|date("m/d/Y") }}</td>
             <td>{{ mission.priority }}</td>
             <td>{{ mission.status }}</td>
             <td>

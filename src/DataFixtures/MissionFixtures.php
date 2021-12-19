@@ -26,7 +26,7 @@ class MissionFixtures extends Fixture
             $mission->setPriority('medium');
             $mission->setCompletionDate(new \DateTime());
             $mission->setStatus('In progress');
-            $mission->addSuperHero($this->userRepository->findOneBy(['id' => rand(78, 86)]));
+            $mission->addSuperHero($this->userRepository->findOneBy(['id' => rand(3, 9)]));
 
             $manager->persist($mission);
         }
