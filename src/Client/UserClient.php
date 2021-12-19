@@ -8,6 +8,7 @@ class UserClient
 
     public static function superHeroes(int $superHeroesId): array
     {
+        // Get super heroes
         $superhero = json_decode(file_get_contents(self::api_url . $superHeroesId), true);
 
         return $superhero;
