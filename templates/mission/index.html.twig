@@ -10,6 +10,7 @@
 
 <div class="example-wrapper">
     <h1>Tableau des missions - AIDSH</h1>
+    <a href="{{ path('create_mission') }}">Add a mission</a>
 
     <table>
     {% for mission in missions %}
@@ -20,7 +21,7 @@
             <td>{{ mission.status }}</td>
             <td>
                 <a href="{{ path('mission_details', {'id': mission.id}) }}">See more</a>
-                <a href="">Edit</a>
+                <a href="{{ path('mission_edit', {'id': mission.id}) }}">Edit</a>
             </td>
         </tr>
     {% endfor %}
