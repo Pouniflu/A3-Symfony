@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Mission;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -39,11 +40,15 @@ class MissionType extends AbstractType
                     'Done' => 'done'
                 ]
             ])
-            ->add('superHeroes', CollectionType::class, [
-                'entry_type' => User::class,
-                'entry_options' => [
-                    'attr' => ['class' => 'email-box']
-                ]
+            ->add('superHeroes', EntityType::class, [
+                'class' => User::class,
+                'choices' => $options['superHeroes'],
+                'choice_label' => function($choice) {
+                    return $choice->getUsername();
+                },
+                'multiple' => true,
+                'expanded' => true,
+                'error_bubbling' => true,
             ])
             ->add('submit', SubmitType::class, ['label' => 'Create a mission'])
         ;
@@ -53,6 +58,7 @@ class MissionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Mission::class,
+            'superHeroes' => [],
         ]);
     }
 }

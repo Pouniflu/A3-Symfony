@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Mission;
 use App\Form\MissionType;
 use App\Repository\MissionRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,10 +26,12 @@ class MissionController extends AbstractController
 
     // CREATE
     #[Route('/missions/create', name: 'create_mission')]
-    public function createMission(Request $request): Response
+    public function createMission(Request $request, UserRepository $userRepository): Response
     {
         $mission = new Mission();
-        $form = $this->createForm(MissionType::class, $mission);
+        $form = $this->createForm(MissionType::class, $mission, [
+            'superHeroes' => $userRepository->findAll(),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -67,7 +70,7 @@ class MissionController extends AbstractController
 
     // EDIT
     #[Route('/missions/{id}/edit', name: 'mission_edit')]
-    public function editMission(int $id, Request $request): Response
+    public function editMission(int $id, Request $request, UserRepository $userRepository): Response
     {
         $mission = $this->missionRepository->find($id);
 
@@ -75,7 +78,9 @@ class MissionController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $form = $this->createForm(MissionType::class, $mission);
+        $form = $this->createForm(MissionType::class, $mission, [
+            'superHeroes' => $userRepository->findAll(),
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
