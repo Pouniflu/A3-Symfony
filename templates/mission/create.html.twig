@@ -27,13 +27,16 @@
     <div class="col">
         {{ form_row(form.status) }}
     </div>
+    {% if is_granted("ROLE_ADMIN") %}
     <div class="row">
         {{ form_row(form.superHeroes) }}
     </div>
+    {% endif %}
     <div class="col">
         {{ form_row(form.completion_date) }}
     </div>
 
     {{ form_end(form) }}
+
 </div>
 {% endblock %}
