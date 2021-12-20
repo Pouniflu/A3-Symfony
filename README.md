@@ -58,4 +58,4 @@ php bin/console server:run
 * [TablePlus](https://tableplus.com) - GUI tool for relational databases
 
 ## Author
-**Claire Brisbart** _alias_ [@Pounfilu](https://github.com/Pouniflu), third year student in web development at [IIM Digital School](https://www.iim.fr).
+**Claire Brisbart** _alias_ [@Pouniflu](https://github.com/Pouniflu), third year student in web development at [IIM Digital School](https://www.iim.fr).
