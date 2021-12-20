@@ -18,13 +18,19 @@ This work was done as part of the Symfony course and refers to a back-office for
 ### Installation
 
 Execute this in `laragon/www` :
-```git clone git@github.com:Pouniflu/A3-Symfony.git```
+```
+git clone git@github.com:Pouniflu/A3-Symfony.git
+```
 
 Go to `laragon/www/A3-Symfony.git` and execute :
-```composer install```
+```
+composer install
+```
 
-_If you don't have CLI Symfony, execute
-```composer require webserverbundle ^4.4 --dev```
+_If you don't have CLI Symfony, execute_
+```
+composer require webserverbundle ^4.4 --dev
+```
 
 ## Launch
 
